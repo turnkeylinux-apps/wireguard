@@ -1,13 +1,12 @@
-turnkey-wireguard-16.2 (UNRELEASED) turnkey; urgency=low
-
-  * UPDATE VERSION AS APPROPRIATE AND REPLACE THIS ENTRY PRIOR TO RELEASE!
+turnkey-wireguard-16.2 (1) turnkey; urgency=low
 
   * Fix bugs
 
     - #1610 (wireguard interface not started on reboot)
     - #1613 (ip_forward not persisting after reboot)
+    - #1546 (enable 'mod_setenv' in LigHTTPd config)
 
- -- Stefan Davis <stefan@turnkeylinux.org>  Tue, 15 Jun 2021 15:54:13 +1000
+ -- Stefan Davis <stefan@turnkeylinux.org>  Wed, 04 Aug 2021 09:26:48 +1000
 
 turnkey-wireguard-16.1 (1) turnkey; urgency=low
 
