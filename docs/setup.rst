@@ -1,3 +1,9 @@
+**Important note to TurnKey Hub users**: There is currently a bug_ that means you will need to manually run the firstboot Wireguard config script (aka inithook) interactively; like this::
+
+    /usr/lib/inithooks/bin/wireguard.py
+
+----
+
 In this example configuration we'll describe a situation where
 2 computers running on a 192.168.1.0/24 subnet wish to form a
 strict server/client tunnel. Where "client" tunnels all of their
@@ -98,3 +104,4 @@ configuration scripts are endorsed by Jason A. Donenfeld or `WireGuard®`_.
 
 .. _CIDR: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 .. _WireGuard®: https://www.wireguard.com/
+.. _bug: https://github.com/turnkeylinux/tracker/issues/1646
