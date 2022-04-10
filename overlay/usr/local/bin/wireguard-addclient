@@ -105,8 +105,10 @@ def get_next_ip(server_addr, taken_ips):
     the ip range is pulled from the server_addr since it's in cidr'''
     # the server addr can't be allocated to a new client either 
     taken_ips.add(server_addr)
+    print("server address:", server_addr)
     # and just incase, remove the CIDRs
     taken_ips = set(map(strip_cidr, taken_ips))
+    print("taken IP list:\n",taken_ips)
     bit_count, ip = parse_cidr(server_addr)
     ip_bits = bin(ip[0] << 24 | ip[1] << 16 | ip[2] << 8 | ip[3])[2:].zfill(32)
     left_part = ip_bits[:bit_count]
@@ -114,8 +116,10 @@ def get_next_ip(server_addr, taken_ips):
     # conveniently an itertools.product of ('01', repeat=N) produces
     # all N-bit integers in order
     for right_part in itertools.product('01', repeat=right_part_size):
+        if int(''.join(right_part),2) & 0xf == 0: continue # skip .0 address
         test_ip = bits_to_ip(left_part + ''.join(right_part))
         if not test_ip in taken_ips:
+            print("ASSIGNED IP:",test_ip)
             return test_ip
     fatal('unable to find free IP in virtual subnet')
 
@@ -124,15 +128,30 @@ def get_domain():
         domain = fob.read().strip()
     return domain
 
-def add_client(client_name, allowed_ips):
+def add_client(client_name, client_ip, allowed_ips):
     subprocess.run(['wg-quick', 'save', 'wg0'])
+
+    client_conf = f'/etc/wireguard/clients/{client_name}.conf'
+    if os.path.isfile(client_conf):
+        print('FATAL: Client name already exists')
+        exit(1)
+
     server_addr, server_port, taken_ips = parse_config('/etc/wireguard/wg0.conf')
+    print(taken_ips)
+    if client_ip in taken_ips:
+        print('FATAL: IP address already assigned')
+        exit(1)
+
     priv_key, pub_key = gen_key()
-    client_virt_ip = get_next_ip(server_addr, taken_ips)
+    if client_ip != '0.0.0.0':
+        client_virt_ip = client_ip
+    else:
+        client_virt_ip = get_next_ip(allowed_ips, taken_ips)
+        
     subprocess.run([
         'wg', 'set', 'wg0',
         'peer', pub_key,
-        'allowed-ips', client_virt_ip + '/32',
+        'allowed-ips', allowed_ips,
     ])
     subprocess.run([
         'python3', '/usr/local/bin/wireguard-client-list.py', 'add',
@@ -143,13 +162,12 @@ def add_client(client_name, allowed_ips):
         server_pub_key = fob.read().strip()
     if not isdir('/etc/wireguard/clients'):
         os.mkdir('/etc/wireguard/clients')
-    client_conf = f'/etc/wireguard/clients/{client_name}.conf'
     with open(client_conf, 'w') as fob:
         fob.write(f'''
 [Interface]
 PrivateKey = {priv_key}
 Address = {client_virt_ip}
-SaveConfig = true
+# SaveConfig = true
 
 [Peer]
 PublicKey = {server_pub_key}
@@ -165,10 +183,13 @@ if __name__ == '__main__':
     parser.add_argument('allowed_ips',
         default='0.0.0.0/0',
         help='IP range(s) of client\'s traffic to route through this vpn')
+    parser.add_argument('client_ip', 
+        default='0.0.0.0',
+        help='IP address assigned to client interface')
     args = parser.parse_args()
 
     try:
-        add_client(args.client_name, args.allowed_ips)
+        add_client(args.client_name, args.client_ip, args.allowed_ips)
     except InvalidIP as e:
         fatal(e.args[0])
 
