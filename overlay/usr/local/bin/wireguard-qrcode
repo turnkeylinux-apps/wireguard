@@ -1,0 +1,6 @@
+#!/bin/bash
+: ${1?"Usage: $0 client_name"}
+: ${WIREGUARD_CLIENT_DIR:=/etc/wireguard/clients}
+
+[ -x "$(command -v qrencode)" ] || { >&2 echo "Error: qrencode not found in path"; exit 1; }
+qrencode -t ansiutf8 < ${WIREGUARD_CLIENT_DIR}/${1}.conf
