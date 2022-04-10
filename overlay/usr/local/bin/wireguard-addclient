@@ -151,7 +151,7 @@ def add_client(client_name, client_ip, allowed_ips):
     subprocess.run([
         'wg', 'set', 'wg0',
         'peer', pub_key,
-        'allowed-ips', allowed_ips,
+        'allowed-ips', client_virt_ip + '/32',
     ])
     subprocess.run([
         'python3', '/usr/local/bin/wireguard-client-list.py', 'add',
