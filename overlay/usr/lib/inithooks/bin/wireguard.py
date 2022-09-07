@@ -18,7 +18,7 @@ import sys
 import getopt
 import inithooks_cache
 
-from dialog_wrapper import Dialog
+from libinithooks.dialog_wrapper import Dialog
 import subprocess
 
 def fatal(e):

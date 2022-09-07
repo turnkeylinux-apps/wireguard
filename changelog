@@ -1,3 +1,14 @@
+turnkey-wireguard-17.0 (1) turnkey; urgency=low
+
+  * Update wireguard and its dependencies to tkldev v17.
+
+  * Update dialog_wrapper to refactored version for tkldev v17.
+
+  *  Note: Please refer to turnkey-core's 16.1 changelog for changes common to all appliances.
+     Here we only describe changes specific to this appliance.
+
+ -- Mattie Darden <mattie@turnkeylinux.org>  Mon, 05 Sep 2022 15:00:18 +0000
+
 turnkey-wireguard-16.2 (1) turnkey; urgency=low
 
   * Fix bugs
