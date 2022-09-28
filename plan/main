@@ -2,3 +2,8 @@
 
 linux-headers-amd64
 lighttpd
+php-cgi
+adminer
+lighttpd-mod-openssl
+php-fpm
+
