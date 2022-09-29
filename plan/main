@@ -1,8 +1,4 @@
 #include <turnkey/base>
 
-linux-headers-amd64
 lighttpd
-php-cgi
 lighttpd-mod-openssl
-
-
