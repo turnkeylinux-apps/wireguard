@@ -9,7 +9,8 @@ apt install --assume-yes wireguard
 # webserver related
 mkdir -p /var/www/wireguard/logs
 chown www-data:www-data /var/www/wireguard/logs
-lighty-disable-mod ssl
+lighty-enable-mod wireguard
+lighty-enable-mod ssl
 
 mkdir -p $HTDOCS/{css,images}
 cp /var/www/js/ui.* $HTDOCS/js/
