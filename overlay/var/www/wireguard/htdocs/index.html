@@ -71,13 +71,11 @@
                     privileges, so may need to be prefixed with
                     <code>sudo</code>.</p>
                     <h3>Create a client profile</h3>
-                    <pre>wireguard-addclient client-name client-email [private-subnet]</pre>
+                    <pre>wireguard-addclient client-name [private-subnet]</pre>
                     <h3>Create auto-expiring obfuscated client profile download url</h3>
                     <pre>/var/www/wireguard/bin/addprofile client-name</pre>
                     <h3>Manually trigger deletion of expired profile download urls</h3>
                     <pre>/etc/cron.hourly/wireguard-profiles-delexpired</pre>
-                    <h3>Revoke client certificate</h3>
-                    <pre>wireguard-revoke client-name</pre>
                 </div>
             </div>
         </div>
