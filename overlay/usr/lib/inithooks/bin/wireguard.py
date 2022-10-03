@@ -16,8 +16,8 @@ Server profile options:
 import os
 import sys
 import getopt
-import inithooks_cache
 
+from libinithooks import inithooks_cache
 from libinithooks.dialog_wrapper import Dialog
 import subprocess
 
