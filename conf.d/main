@@ -9,8 +9,12 @@ apt install --assume-yes wireguard
 # webserver related
 mkdir -p /var/www/wireguard/logs
 chown www-data:www-data /var/www/wireguard/logs
+
+service lighttpd restart
 lighty-enable-mod wireguard
-lighty-enable-mod ssl
+service lighttpd force-reload
+service lighttpd restart
+service lighttpd status
 
 mkdir -p $HTDOCS/{css,images}
 cp /var/www/js/ui.* $HTDOCS/js/
@@ -20,3 +24,4 @@ rm -rf /var/www/{js,css,images}
 
 # ensure ipv4 forwarding is enabled
 sed -i 's/#* *net.ipv4.ip_forward=.*/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+
