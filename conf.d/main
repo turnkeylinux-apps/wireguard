@@ -11,7 +11,6 @@ mkdir -p /var/www/wireguard/logs
 chown www-data:www-data /var/www/wireguard/logs
 
 lighty-enable-mod wireguard
-service lighttpd force-reload
 lighttpd -tt -f /etc/lighttpd/lighttpd.conf
 
 mkdir -p $HTDOCS/{css,images}
