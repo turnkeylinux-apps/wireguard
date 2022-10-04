@@ -10,11 +10,9 @@ apt install --assume-yes wireguard
 mkdir -p /var/www/wireguard/logs
 chown www-data:www-data /var/www/wireguard/logs
 
-service lighttpd restart
 lighty-enable-mod wireguard
 service lighttpd force-reload
-service lighttpd restart
-service lighttpd status
+lighttpd -tt -f /etc/lighttpd/lighttpd.conf
 
 mkdir -p $HTDOCS/{css,images}
 cp /var/www/js/ui.* $HTDOCS/js/
