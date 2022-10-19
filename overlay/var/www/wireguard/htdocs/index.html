@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Style-Type" content="text/css">
         <meta http-equiv="Content-Script-Type" content="text/javascript">
 
-        <title>TurnKey Wireguard</title>
+        <title>TurnKey WireGuard</title>
         
         <link rel="stylesheet" href="/css/ui.tabs.css" type="text/css" media="print, projection, screen">
         <link rel="stylesheet" href="/css/base.css" type="text/css">
@@ -30,7 +30,7 @@
     </head>
 
     <body>
-        <h1>TurnKey Wireguard</h1>
+        <h1>TurnKey WireGuard</h1>
         
         <div id="container-1">
             <ul>
@@ -54,9 +54,28 @@
 
                     <h2>Resources and references</h2>
                     <ul>
-                        <li><a href="https://www.turnkeylinux.org/wireguard">TurnKey Wireguard release notes</a></li>
-                        <li><a href="https://github.com/turnkeylinux-apps/wireguard/tree/master/docs">TurnKey Wireguard Usage documentation</a></li>
+                        <li><a href="https://www.wireguard.com/">WireGuard website</a></li>
+                        <li><a href="https://www.turnkeylinux.org/wireguard">TurnKey WireGuard release notes</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.wireguard.android">WireGuard offical Android app on Google Play</a></li>
+                        <li><a href="https://apps.apple.com/us/app/wireguard/id1441195209">WireGuard offical iOS app on the Apple App Store</a></li>
+                        <li><a href="https://github.com/turnkeylinux-apps/wireguard/tree/master/docs">TurnKey WireGuard Usage documentation</a></li>
                     </ul>
+                </div>
+            </div>
+            <div id="ref">
+                <div class="fragment-content">
+                    <p>Note to AWS Marketplace users, who have NOT <a
+                    href="https://www.turnkeylinux.org/awsmp#root">enabled
+                    root</a>:
+                    <br />some of these commands may require root
+                    privileges, so may need to be prefixed with
+                    <code>sudo</code>.</p>
+                    <h3>Create a client profile</h3>
+                    <pre>wireguard-addclient client-name [private-subnet]</pre>
+                    <h3>Create auto-expiring obfuscated client profile download url</h3>
+                    <pre>/var/www/wireguard/bin/addprofile client-name</pre>
+                    <h3>Manually trigger deletion of expired profile download urls</h3>
+                    <pre>/etc/cron.hourly/wireguard-profiles-delexpired</pre>
                 </div>
             </div>
         </div>
