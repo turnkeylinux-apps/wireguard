@@ -149,7 +149,6 @@ def add_client(client_name, allowed_ips):
 [Interface]
 PrivateKey = {priv_key}
 Address = {client_virt_ip}
-SaveConfig = true
 
 [Peer]
 PublicKey = {server_pub_key}
