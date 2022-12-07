@@ -1,4 +1,4 @@
-''' Create a link to a profile created with wireguard-addclient '''
+'''Create a link to a profile created with wireguard-addclient'''
 
 import os, glob
 from subprocess import check_output, CalledProcessError, PIPE
