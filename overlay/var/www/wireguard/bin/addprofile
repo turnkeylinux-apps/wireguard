@@ -29,7 +29,11 @@ PROFILE_PATH=$PROFILES/$PROFILE_HASH
 
 mkdir -p $PROFILE_PATH
 cp $CONF_PATH $PROFILE_PATH/
-sed "s|CLIENT_NAME|$client_name|" $TEMPLATE > $PROFILE_PATH/index.html
+awk -v config_content="$(cat $CONF_PATH)" '{
+    sub(/CONFIG_CONTENT/, config_content);
+    print;
+}' $TEMPLATE > $PROFILE_PATH/index.html
+sed -i "s|CLIENT_NAME|$client_name|" $PROFILE_PATH/index.html
 chown -R www-data:www-data $PROFILES
 chmod 440 $PROFILE_PATH/$client_name.conf
 
