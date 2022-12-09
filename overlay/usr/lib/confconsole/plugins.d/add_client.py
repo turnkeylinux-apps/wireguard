@@ -1,4 +1,4 @@
-'''Helper script for wireguard-addclient'''
+'''Create wireguard client(peer)'''
 
 import os
 from subprocess import Popen, CalledProcessError, PIPE, check_output

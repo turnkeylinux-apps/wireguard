@@ -1,4 +1,4 @@
-'''Create a link to a profile created with wireguard-addclient'''
+'''Create a link to client's profile'''
 
 import os, glob
 from subprocess import check_output, CalledProcessError, PIPE
@@ -18,4 +18,4 @@ def run():
             console.msgbox(TITLE, check_output(["/var/www/wireguard/bin/addprofile", profile], text=True))
 
     if not profiles:
-        console.msgbox(TITLE, "First create a profile with Addclient plugin")
+        console.msgbox(TITLE, "First create a client via Add client menu.")
