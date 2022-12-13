@@ -129,15 +129,19 @@ def add_client(client_name, allowed_ips):
     server_addr, server_port, taken_ips = parse_config('/etc/wireguard/wg0.conf')
     priv_key, pub_key = gen_key()
     client_virt_ip = get_next_ip(server_addr, taken_ips)
+    proc = subprocess.run([
+        'python3', '/usr/local/bin/wireguard-client-list.py', 'add',
+        client_name, pub_key
+    ], capture_output=True, text=True)
+    if proc.returncode:
+        fatal(proc.stderr)
+
     subprocess.run([
         'wg', 'set', 'wg0',
         'peer', pub_key,
         'allowed-ips', client_virt_ip + '/32',
     ])
-    subprocess.run([
-        'python3', '/usr/local/bin/wireguard-client-list.py', 'add',
-        client_name, pub_key
-    ])
+    subprocess.run(['wg-quick', 'save', 'wg0'], capture_output=True)
 
     with open('/etc/wireguard/server.pub', 'r') as fob:
         server_pub_key = fob.read().strip()
