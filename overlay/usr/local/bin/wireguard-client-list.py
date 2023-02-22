@@ -20,10 +20,10 @@ def gen_name(names):
 
 def list_wg_peers():
     pubkeys = []
-    for line in subprocess.run(['wg', 'show', 'wg0'],
+    for line in subprocess.run(['wg', 'show', 'wg0', 'peers'],
             text=True, capture_output=True).stdout.splitlines():
-        if line.startswith('peer'):
-            pubkeys.append(line.split(':')[1].strip())
+        if line:
+            pubkeys.append(line.strip())
     return pubkeys
 
 def read_conf():

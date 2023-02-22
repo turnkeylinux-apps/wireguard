@@ -1,4 +1,4 @@
-'''Helper script for wireguard-addclient'''
+'''Create wireguard client(peer)'''
 
 import os
 from subprocess import Popen, CalledProcessError, PIPE, check_output
@@ -17,8 +17,9 @@ def run():
             out, err = proc.communicate()
             returncode = proc.returncode
             if returncode == 0:
-                out = console.yesno(f'{out}\nGenerate download link for conf?')
-                if out == 'yes':
+                out = console.yesno(f'{out}\nGenerate download link for conf?',
+                                    autosize=True)
+                if out == 'ok':
                     console.msgbox(TITLE, check_output([
                         '/var/www/wireguard/bin/addprofile', name
                     ], text=True))

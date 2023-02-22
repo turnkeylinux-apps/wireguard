@@ -10,9 +10,22 @@
       text-align: center;
     }
     #qrcode {
-      width: 100px;
+      width: 280px;
       height: 100px;
+      margin: 70px auto;
+    }
+    #qrcode h4{
+      float: right;
+      width: 150px;
+    }
+    #qrcode-client-config {
+      width: 380px;
+      height: 200px;
       margin: 50px auto;
+    }
+    #qrcode-client-config h4{
+      float: right;
+      width: 170px;
     }
     #turnkey-credit {
       font-family: Tahoma,Sans,Arial,Helvetica,Verdana,sans-serif;
@@ -29,8 +42,13 @@
 </head>
 <body>
   <h1>Wireguard Profile</h1>
-  <div id="qrcode"></div>
-  <a href="CLIENT_NAME.conf">download</a>
+  <div id="qrcode">
+    <h4>Scan to navigate here with your device</h4>
+  </div>
+  <div id="qrcode-client-config">
+    <h4>Scan to import configuration using mobile app</h4>
+  </div>
+  <a href="CLIENT_NAME.conf" download>download</a>
   <div id='turnkey-credit'>
     <a href='https://www.turnkeylinux.org/wireguard'>Wireguard Appliance</a> -
     Powered by <a href='https://www.turnkeylinux.org'>TurnKey Linux</a>
@@ -43,6 +61,15 @@
     });
 
     qrcode.makeCode(window.location.href);
+
+    var configContent = `CONFIG_CONTENT`;
+    var qrcodeConfig = new QRCode(document.getElementById("qrcode-client-config"), {
+      width : 200,
+      height : 200,
+      correctLevel: QRCode.CorrectLevel.L
+    });
+
+    qrcodeConfig.makeCode(configContent);
   </script>
 </body>
 </html>

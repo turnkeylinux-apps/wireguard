@@ -1,0 +1,4 @@
+#!/bin/bash -e
+# delete stale wireguard client profiles
+
+su www-data -s /bin/bash -c /var/www/wireguard/bin/delstale

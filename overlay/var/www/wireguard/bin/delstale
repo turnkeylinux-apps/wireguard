@@ -1,0 +1,14 @@
+#!/bin/bash -e
+# delete stale wireguard client profiles
+
+fatal() { echo "FATAL: $@" 1>&2; exit 1; }
+
+PROFILES=/var/www/wireguard/htdocs/profiles/*
+
+[ "$(whoami)" == "www-data" ] || fatal "must be executed as www-data user"
+
+for p in $PROFILES; do
+    [ -d $p ] || continue
+    echo "deleting $p"
+    rm -rf $p
+done

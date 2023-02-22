@@ -2,6 +2,7 @@
 from argparse import ArgumentParser
 import subprocess
 import sys
+from os import path, remove
 
 def fatal(msg):
     print(msg, file=sys.stderr)
@@ -29,7 +30,13 @@ if __name__ == '__main__':
     ret = subprocess.run([
         'wg', 'set', 'wg0', 'peer', pubkey, 'remove', 
     ], capture_output=True)
+    
+    subprocess.run(['wg-quick', 'save', 'wg0'], capture_output=True)
 
+    conf_path = f'/etc/wireguard/clients/{args.name}.conf'
+    if path.isfile(conf_path):
+        remove(conf_path)
+    
     subprocess.run([
         'python3', '/usr/local/bin/wireguard-client-list.py',
         'sync'
