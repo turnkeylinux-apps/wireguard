@@ -1,20 +1,22 @@
 '''Remove wireguard client(peer)'''
 
-import os, glob
+import os
+import glob
 import subprocess
 TITLE = "Remove client"
+
 
 def run():
     while True:
         list = glob.glob("/etc/wireguard/clients/*.conf")
         profiles = []
-        for idx, file in enumerate(list):    
+        for idx, file in enumerate(list):
             base = os.path.basename(file)
             file = os.path.splitext(base)[0]
             profiles.append((file, str(idx)))
-        
+
         if profiles:
-            ret, profile = console.menu(TITLE, "Select profile", profiles) 
+            ret, profile = console.menu(TITLE, "Select profile", profiles)
             if ret == 'ok':
                 proc = subprocess.run([
                     'wireguard-removeclient', profile,

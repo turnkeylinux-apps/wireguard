@@ -21,9 +21,11 @@ from libinithooks import inithooks_cache
 from libinithooks.dialog_wrapper import Dialog
 import subprocess
 
+
 def fatal(e):
     print('Error:', e, file=sys.stderr)
     sys.exit(1)
+
 
 def usage(e=None):
     if e:
@@ -32,10 +34,11 @@ def usage(e=None):
     print(__doc__, file=sys.stderr)
     sys.exit(1)
 
+
 def main():
     try:
-        opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                ['help', 'virtual-subnet=', 'domain='])
+        opts, args = getopt.gnu_getopt(
+                sys.argv[1:], "h", ['help', 'virtual-subnet=', 'domain='])
     except getopt.GetoptError as e:
         usage(e)
 
@@ -58,13 +61,14 @@ def main():
     if not profile:
         profile = dialog.menu(
                 "Wireguard Profile",
-                "Choose a profile for this server.\n\n* Server: clients will route traffic through the VPN.",
+                "Choose a profile for this server.\n\n"
+                "* Server: clients will route traffic through the VPN.",
                 [
                     ('server', 'Accccept VPN connections from clients*'),
                     ('client', 'Initiate VPN connections to a server')
                 ])
 
-    if not profile in ('server', 'client'):
+    if profile not in ('server', 'client'):
         fatal(f'invalid profile: {profile!r}')
 
     if profile == 'client':
@@ -76,15 +80,16 @@ def main():
                 "Enter IP address in CIDR of server reachable by clients",
                 "10.0.0.0/8")
 
-
     if not domain:
         domain = dialog.get_input(
                 "Wireguard Public Address",
                 "Used in client configuration as wireguard endpoint",
                 "www.example.com")
-    
-    cmd = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'wireguard-server-init.sh')
+
+    cmd = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                       'wireguard-server-init.sh')
     subprocess.run([cmd, virtual_subnet, domain])
+
 
 if __name__ == '__main__':
     main()
