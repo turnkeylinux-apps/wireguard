@@ -2,3 +2,5 @@
 
 lighttpd
 lighttpd-mod-openssl
+
+wireguard
