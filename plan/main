@@ -4,3 +4,4 @@ lighttpd
 lighttpd-mod-openssl
 
 wireguard
+wireguard-tools
