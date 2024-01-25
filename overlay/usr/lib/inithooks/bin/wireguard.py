@@ -64,7 +64,7 @@ def main():
                 "Choose a profile for this server.\n\n"
                 "* Server: clients will route traffic through the VPN.",
                 [
-                    ('server', 'Accccept VPN connections from clients*'),
+                    ('server', 'Accept VPN connections from clients*'),
                     ('client', 'Initiate VPN connections to a server')
                 ])
 

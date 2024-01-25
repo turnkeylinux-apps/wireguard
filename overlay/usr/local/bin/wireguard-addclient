@@ -166,6 +166,7 @@ if __name__ == '__main__':
         description='Generate keys and configuration for a new client')
     parser.add_argument('client_name', help='Unique name for client')
     parser.add_argument('allowed_ips',
+        nargs='?',
         default='0.0.0.0/0',
         help='IP range(s) of client\'s traffic to route through this vpn')
     args = parser.parse_args()

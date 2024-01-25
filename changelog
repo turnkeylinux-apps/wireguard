@@ -1,3 +1,12 @@
+turnkey-wireguard-18.0 (1) turnkey; urgency=low
+
+  * Update Wireguard to Debian Bookworm version (currently v1.0.20210914).
+
+  * Note: Please refer to turnkey-core's 18.0 changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Anton Pyrogovskyi <anton@turnkeylinux.org>  Wed, 10 Jan 2024 22:08:29 +0100
+
 turnkey-wireguard-17.1 (1) turnkey; urgency=low
 
   * Updated all Debian packages to latest.

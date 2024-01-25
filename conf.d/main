@@ -2,10 +2,6 @@
 
 HTDOCS=/var/www/wireguard/htdocs
 
-# required as wireguard is only available in bullseye currently
-apt update
-apt install --assume-yes wireguard
-
 # webserver related
 mkdir -p /var/www/wireguard/logs
 chown www-data:www-data /var/www/wireguard/logs
