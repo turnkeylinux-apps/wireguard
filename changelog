@@ -12,6 +12,10 @@ turnkey-wireguard-18.0 (1) turnkey; urgency=low
   * Explcitly install wireguard-tools package - closes #1824.
     [Anton Pyrogovskyi <anton@turnkeylinux.org>]
 
+  * Confconsole: bugfix broken DNS-01 Let's Encrypt challenge- closes #1876 &
+    #1895.
+    [Jeremy Davis <jeremy@turnkeylinux.org>]
+
   * Ensure hashfile includes URL to public key - closes #1864.
 
   * Include webmin-logviewer module by default - closes #1866.
@@ -49,6 +53,7 @@ turnkey-wireguard-18.0 (1) turnkey; urgency=low
 
   * Web management console (webmin):
     - Upgraded webmin to v2.105.
+    - Replace webmin-shell with webmin-xterm module by default - closes #1904.
     - Removed stunnel reverse proxy (Webmin hosted directly now).
     - Ensure that Webmin uses HTTPS with default cert
       (/etc/ssl/private/cert.pem).
@@ -76,7 +81,7 @@ turnkey-wireguard-18.0 (1) turnkey; urgency=low
     - Improve turnkey-artisan so that it works reliably in cron jobs (only
       Laravel based LAMP apps).
 
- -- Jeremy Davis <jeremy@turnkeylinux.org>  Thu, 25 Jan 2024 02:49:16 +0000
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Wed, 13 Mar 2024 07:32:05 +0000
 
 turnkey-wireguard-17.1 (1) turnkey; urgency=low
 
