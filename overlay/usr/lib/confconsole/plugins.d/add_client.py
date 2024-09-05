@@ -5,7 +5,6 @@ from subprocess import Popen, CalledProcessError, PIPE, check_output
 
 TITLE = "Add client"
 
-
 def run():
     while True:
         rty, name = console.inputbox(TITLE, "Enter name")
@@ -14,8 +13,12 @@ def run():
         rte, traffic_cidr = console.inputbox(
                 TITLE, "Enter traffic CIDR to route into VPN")
         if rte == 'ok' and rty == 'ok':
-            proc = Popen(["wireguard-addclient", name, traffic_cidr],
-                         stderr=PIPE, stdout=PIPE, text=True)
+            args = ["wireguard-addclient", name]
+
+            if traffic_cidr:
+                args.append(traffic_cidr)
+
+            proc = Popen(args, stderr=PIPE, stdout=PIPE, text=True)
             out, err = proc.communicate()
             returncode = proc.returncode
             if returncode == 0:
