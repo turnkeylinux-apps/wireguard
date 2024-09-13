@@ -1,3 +1,20 @@
+turnkey-wireguard-18.1 (1) turnkey; urgency=low
+
+  * v18.1 rebuild - includes latest Debian & TurnKey packages.
+
+  * Bugfix add_client confconsole plug-in - untracked bug.
+    [Anton Pyrogovskyi <anton@turnkeylinux.org>]
+
+  * Configuration console (confconsole) - v2.1.6:
+    - Bugfix broken DNS-01 Let's Encrypt challenge - closes #1876 & #1895.
+      Fixed in v2.1.5 - already included in some appliances.
+    - Let's Encrypt/Dehydrated - bugfix cron failure - closes #1962.
+    - General dehydrated-wrapper code cleanup - now passes shellcheck.
+
+  * Reduce log noise by creating ntpsec log dir - closes #1952.
+
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Thu, 12 Sep 2024 03:00:26 +0000
+
 turnkey-wireguard-18.0 (1) turnkey; urgency=low
 
   * Update Wireguard to Debian Bookworm version (currently v1.0.20210914).
@@ -9,7 +26,7 @@ turnkey-wireguard-18.0 (1) turnkey; urgency=low
   * Rename firstboot env var APP_IP -> APP_VIRTUAL_SUBNET - addresses #1646.
     [Anton Pyrogovskyi <anton@turnkeylinux.org>]
 
-  * Explcitly install wireguard-tools package - closes #1824.
+  * Explictly install wireguard-tools package - closes #1824.
     [Anton Pyrogovskyi <anton@turnkeylinux.org>]
 
   * Confconsole: bugfix broken DNS-01 Let's Encrypt challenge- closes #1876 &

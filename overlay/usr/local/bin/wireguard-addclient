@@ -168,7 +168,7 @@ if __name__ == '__main__':
     parser.add_argument('allowed_ips',
         nargs='?',
         default='0.0.0.0/0',
-        help='IP range(s) of client\'s traffic to route through this vpn')
+        help="IP range(s) of client's traffic to route through this vpn (default is 0/0)")
     args = parser.parse_args()
 
     try:
