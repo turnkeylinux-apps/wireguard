@@ -86,9 +86,15 @@ def main():
                 "Used in client configuration as wireguard endpoint",
                 "www.example.com")
 
+    inithooks_cache.write('APP_DOMAIN', domain)
+
     cmd = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                        'wireguard-server-init.sh')
-    subprocess.run([cmd, virtual_subnet, domain])
+    proc = subprocess.run([cmd, virtual_subnet, domain],
+                          capture_output=True,
+                          text=True)
+    if proc.returncode != 0:
+        fatal(f"command {' '.join(cmd)} failed.")
 
 
 if __name__ == '__main__':
