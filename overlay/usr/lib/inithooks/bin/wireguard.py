@@ -94,7 +94,8 @@ def main():
                           capture_output=True,
                           text=True)
     if proc.returncode != 0:
-        fatal(f"command {' '.join(cmd)} failed.")
+        fatal(f"command {' '.join(cmd)} failed:"
+              f"\n{sys.stderr}")
 
 
 if __name__ == '__main__':
