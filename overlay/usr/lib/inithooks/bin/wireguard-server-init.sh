@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
-fatal() { echo "FATAL [$(basename $0)]: $@" 1>&2; exit 1; }
-info() { echo "INFO [$(basename $0)]: $@"; }
+fatal() { echo "FATAL [$(basename "$0")]: $*" 1>&2; exit 1; }
+info() { echo "INFO [$(basename "$0")]: $*"; }
 
 usage() {
     cat << EOF
@@ -25,7 +25,7 @@ domain="$2"
 WIREGUARD=/etc/wireguard
 
 for interface in $(wg show interfaces); do
-    wg-quick down $interface
+    wg-quick down "$interface"
 done
 rm -rf /etc/wireguard/*
 
