@@ -10,4 +10,4 @@ if [[ -n "$SEC_UPDATES" ]] && [[ -z "$APP_VIRTUAL_SUBNET" ]]; then
     exit 0
 fi
 
-$INITHOOKS_PATH/bin/wireguard.py --virtual-subnet="$APP_VIRTUAL_SUBNET" --domain="$APP_DOMAIN"
+$INITHOOKS_PATH/bin/wireguard.py --profile="$APP_PROFILE" --virtual-subnet="$APP_VIRTUAL_SUBNET" --domain="$APP_DOMAIN"

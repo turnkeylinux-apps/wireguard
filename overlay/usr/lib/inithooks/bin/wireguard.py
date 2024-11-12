@@ -38,7 +38,8 @@ def usage(e=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(
-                sys.argv[1:], "h", ['help', 'virtual-subnet=', 'domain='])
+                sys.argv[1:], "h", ['help', 'virtual-subnet=', 'domain=',
+                'profile='])
     except getopt.GetoptError as e:
         usage(e)
 
