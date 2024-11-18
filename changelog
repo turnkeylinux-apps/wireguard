@@ -1,5 +1,14 @@
 turnkey-wireguard-18.1 (1) turnkey; urgency=low
 
+  * v18.2 rebuild - includes latest Debian & TurnKey packages.
+
+  * Bugfix broken Hub launch - inithooks pre-seeding bug - closes #1646.
+    [Stefan Davis <stefan@turnkeylinux.org>]
+
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Mon, 18 Nov 2024 06:09:38 +0000
+
+turnkey-wireguard-18.1 (1) turnkey; urgency=low
+
   * v18.1 rebuild - includes latest Debian & TurnKey packages.
 
   * Bugfix add_client confconsole plug-in - untracked bug.
