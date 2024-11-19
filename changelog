@@ -1,4 +1,4 @@
-turnkey-wireguard-18.1 (1) turnkey; urgency=low
+turnkey-wireguard-18.2 (1) turnkey; urgency=low
 
   * v18.2 rebuild - includes latest Debian & TurnKey packages.
 
