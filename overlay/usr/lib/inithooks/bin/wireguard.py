@@ -89,14 +89,19 @@ def main():
 
     inithooks_cache.write('APP_DOMAIN', domain)
 
+    # setup will fail if wg conf doesn't exist; it should but just in case...
+    wg0_conf = "/etc/wireguard/wg0.conf"
+    if not os.path.exists(wg0_conf):
+        open(wg0_conf, 'w').close()
+
     cmd = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                        'wireguard-server-init.sh')
     proc = subprocess.run([cmd, virtual_subnet, domain],
                           capture_output=True,
                           text=True)
     if proc.returncode != 0:
-        fatal(f"command {' '.join(cmd)} failed:"
-              f"\n{sys.stderr}")
+        fatal(f"command {cmd} failed:"
+              f"\n{proc.stderr}")
 
 
 if __name__ == '__main__':
