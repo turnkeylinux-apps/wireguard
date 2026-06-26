@@ -74,6 +74,9 @@ Each take 2 arguments:
          example:
 
             - 0.0.0.0/0 # will route ALL traffic through the VPN
+                  (this will break your vpn setup, as it will
+                  try and route even your vpn connection itself
+                  through the vpn connection)
             - 172.0.0.0/8 # will route traffic to and from
                   the 172.X.X.X subnet through the VPN
 
