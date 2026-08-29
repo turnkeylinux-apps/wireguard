@@ -17,7 +17,7 @@ wireguard-addclient tkl-v19-client 10.44.0.0/24
 test -s /etc/wireguard/clients/tkl-v19-client.conf
 grep -Fq 'Endpoint = localhost:51820' \
     /etc/wireguard/clients/tkl-v19-client.conf
-client_key=$(wireguard-client-list.py show tkl-v19-client)
+client_key=$(python3 /usr/local/bin/wireguard-client-list.py show tkl-v19-client)
 test -n "$client_key"
 wg show wg0 peers | grep -Fxq "$client_key"
 
