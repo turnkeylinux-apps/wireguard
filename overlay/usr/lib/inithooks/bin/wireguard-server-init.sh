@@ -25,7 +25,12 @@ domain="$2"
 WIREGUARD=/etc/wireguard
 
 for interface in $(wg show interfaces); do
-    wg-quick down "$interface"
+    unit="wg-quick@$interface.service"
+    if systemctl --quiet is-active "$unit"; then
+        systemctl stop "$unit"
+    else
+        wg-quick down "$interface"
+    fi
 done
 rm -rf /etc/wireguard/*
 
@@ -44,6 +49,8 @@ SaveConfig = true
 PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE;
 PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE;
 EOF
+chown root:root "$WIREGUARD/wg0.conf" "$WIREGUARD/private/server.key"
+chmod 600 "$WIREGUARD/wg0.conf" "$WIREGUARD/private/server.key"
 systemctl enable --now wg-quick@wg0.service
 
 echo "$domain" > /etc/wireguard/domain.txt
