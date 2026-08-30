@@ -26,16 +26,22 @@ CONF_PATH=/etc/wireguard/clients/$client_name.conf
 SERVER_ADDR=$(cat /etc/wireguard/domain.txt)
 PROFILE_HASH=$(date +%s%N | cat $CONF_PATH - | sha1sum - | cut -d " " -f 1)
 PROFILE_PATH=$PROFILES/$PROFILE_HASH
+PROFILE_INDEX=$(mktemp /run/wireguard-profile-index.XXXXXX)
 
-mkdir -p $PROFILE_PATH
-cp $CONF_PATH $PROFILE_PATH/
+cleanup() {
+    rm -f -- "$PROFILE_INDEX"
+}
+trap cleanup EXIT
+
+install -d -o www-data -g www-data -m 0750 "$PROFILE_PATH"
+install -o www-data -g www-data -m 0440 \
+    "$CONF_PATH" "$PROFILE_PATH/$client_name.conf"
 awk -v config_content="$(cat $CONF_PATH)" '{
     sub(/CONFIG_CONTENT/, config_content);
     print;
-}' $TEMPLATE > $PROFILE_PATH/index.html
-sed -i "s|CLIENT_NAME|$client_name|" $PROFILE_PATH/index.html
-chown -R www-data:www-data $PROFILES
-chmod 440 $PROFILE_PATH/$client_name.conf
+}' "$TEMPLATE" > "$PROFILE_INDEX"
+sed -i "s|CLIENT_NAME|$client_name|" "$PROFILE_INDEX"
+install -o www-data -g www-data -m 0440 \
+    "$PROFILE_INDEX" "$PROFILE_PATH/index.html"
 
 echo "URL: https://$SERVER_ADDR/profiles/$PROFILE_HASH/"
-
