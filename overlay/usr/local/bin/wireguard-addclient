@@ -159,6 +159,8 @@ PublicKey = {server_pub_key}
 Endpoint = {get_domain()}:{server_port}
 AllowedIPs = {allowed_ips}
 ''')
+    os.chown(client_conf, 0, 0)
+    os.chmod(client_conf, 0o600)
     print(f'Generated {client_conf}')
 
 if __name__ == '__main__':
@@ -175,4 +177,3 @@ if __name__ == '__main__':
         add_client(args.client_name, args.allowed_ips)
     except InvalidIP as e:
         fatal(e.args[0])
-
