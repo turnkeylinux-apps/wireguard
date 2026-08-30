@@ -78,10 +78,10 @@ cmp /etc/wireguard/clients/tkl-v19-client.conf \
 # Exercise the generated profile through an isolated client network namespace.
 # Its localhost endpoint is replaced only for the namespace's outer transport;
 # the generated private key, assigned address, server key and port are used.
-client_address=$(awk -F= '/^Address/ {gsub(/[[:space:]]/, "", $2); print $2; exit}' \
+client_address=$(awk '/^Address/ {sub(/^[^=]*=[[:space:]]*/, ""); print; exit}' \
     /etc/wireguard/clients/tkl-v19-client.conf)
 client_address=${client_address%%/*}
-server_public_key=$(awk -F= '/^PublicKey/ {gsub(/[[:space:]]/, "", $2); print $2; exit}' \
+server_public_key=$(awk '/^PublicKey/ {sub(/^[^=]*=[[:space:]]*/, ""); print; exit}' \
     /etc/wireguard/clients/tkl-v19-client.conf)
 server_port=$(awk -F: '/^Endpoint/ {gsub(/[[:space:]]/, "", $NF); print $NF; exit}' \
     /etc/wireguard/clients/tkl-v19-client.conf)
